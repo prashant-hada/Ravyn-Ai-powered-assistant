@@ -1,12 +1,11 @@
-const apiUrl = import.meta.env.API_KEY;
+const apiUrl = import.meta.env.VITE_API_KEY;
 
 import {
-    GoogleGenerativeAI,
-    HarmCategory,
-    HarmBlockThreshold,
+    GoogleGenerativeAI
 } from "@google/generative-ai";
   
-  const apiKey = apiUrl;
+//   const apiKey = "AIzaSyAAFw_GJKAen9VxlbqhnBQMJJ1VUWGsCDw";
+const apiKey = apiUrl;
   const genAI = new GoogleGenerativeAI(apiKey);
   
   const model = genAI.getGenerativeModel({
@@ -30,6 +29,8 @@ import {
   
     const result = await chatSession.sendMessage(prompt);
     console.log(result.response.text());
+
+    return result;
   }
   
   export default runGemini;
