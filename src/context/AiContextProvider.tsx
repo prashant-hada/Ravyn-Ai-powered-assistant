@@ -1,14 +1,15 @@
 import { useState } from "react";
 import runGemini from "../config/gemini";
 import { AiContext } from "./AiContext";
+import { PromptObj, ResponseObj } from "../types";
 import StorePrevPromptAndResponse from "../utils/storePrevPromptAndResponse";
 
 
 const ContextProvider = ({children}:{children:React.ReactNode})=>{
     const [input, setInput] = useState("");
     const [recentPrompt, setRecentPrompt] = useState("");
-    const [prevPrompts, setPrevPrompts] = useState ([]);
-    const [prevResponses, setPrevResponses] = useState ([]);
+    const [prevPrompts, setPrevPrompts] = useState<PromptObj[]>([]);
+    const [prevResponses, setPrevResponses] = useState<ResponseObj[]> ([]);
     const [showResults, setShowResults] = useState(false);
     const [loading, setLoading] = useState(false);
     const [resultData, setResultData] = useState("");
