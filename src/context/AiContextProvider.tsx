@@ -1,12 +1,14 @@
 import { useState } from "react";
 import runGemini from "../config/gemini";
 import { AiContext } from "./AiContext";
+import StorePrevPromptAndResponse from "../utils/storePrevPromptAndResponse";
 
 
 const ContextProvider = ({children}:{children:React.ReactNode})=>{
     const [input, setInput] = useState("");
     const [recentPrompt, setRecentPrompt] = useState("");
-    const [prevPrompts, setPrevPrompts] = useState("");
+    const [prevPrompts, setPrevPrompts] = useState ([]);
+    const [prevResponses, setPrevResponses] = useState ([]);
     const [showResults, setShowResults] = useState(false);
     const [loading, setLoading] = useState(false);
     const [resultData, setResultData] = useState("");
@@ -15,11 +17,12 @@ const ContextProvider = ({children}:{children:React.ReactNode})=>{
         setResultData("");
         setLoading(true);
         setShowResults(true);
-        setRecentPrompt(input);
+        setRecentPrompt(prompt);
         setInput("");
        const response = await runGemini(prompt);
        const formattedResponse = response.replace(/<b>(.*?)<\/b>/g, "**$1**"); 
        setResultData(formattedResponse);
+       StorePrevPromptAndResponse(prompt, formattedResponse, setPrevPrompts, setPrevResponses)
         setLoading(false);
     }
     // onSent('what is react js');
@@ -36,7 +39,9 @@ const ContextProvider = ({children}:{children:React.ReactNode})=>{
         setLoading,
         setShowResults,
         resultData,
-        setResultData
+        setResultData,
+        prevResponses,
+        setPrevResponses
     }
 
     return(

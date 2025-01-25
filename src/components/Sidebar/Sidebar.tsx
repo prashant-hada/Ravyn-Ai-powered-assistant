@@ -2,14 +2,11 @@ import {useState} from 'react'
 // import { motion } from 'framer-motion'
 import "./Sidebar.css"
 import assets from "../../assets"
+import { useAiContext } from '../../hooks/useAiContext';
 
 const Sidebar = () => {
     const [extended, setExtended] = useState(false);
-    // const [showContent, setShowContent] = useState(false)
-
-    // const handleAnimationComplete = () => {
-    //     setShowContent(prev=> !prev) // Make content visible after width transition is complete
-    //     }
+    const {onSent, prevPrompts, setRecentPrompt} = useAiContext();
 
   return (
         <div 
@@ -23,12 +20,15 @@ const Sidebar = () => {
                     <img src={assets.plus_icon} alt="Plus Icon" />
                     {extended?<p>New Chat</p>:null}
                 </div>
-                {extended?<div className="recent">
+                {extended?
+                <div className="recent">
                     <p className='recent-title'>Recent</p>
-                    <div className="recent-entry">
+                    {prevPrompts.map((item)=>(
+                    <div key={item.id} className="recent-entry">
                         <img src={assets.message_icon} alt="Title" />
-                        <p>What is react ...</p>
+                        <p>{item.prompt.slice(0,18)}...</p>
                     </div>
+                    ))}
                 </div>: null}
             </div>
             <div className="bottom">
