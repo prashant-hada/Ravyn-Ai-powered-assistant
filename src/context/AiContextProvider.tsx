@@ -1,7 +1,7 @@
-import {createContext, useContext, useState } from "react";
+import { useState } from "react";
 import runGemini from "../config/gemini";
+import { AiContext } from "./AiContext";
 
-const AiContext = createContext({});
 
 const ContextProvider = ({children}:{children:React.ReactNode})=>{
     const [input, setInput] = useState("");
@@ -12,9 +12,16 @@ const ContextProvider = ({children}:{children:React.ReactNode})=>{
     const [resultData, setResultData] = useState("");
     
     const onSent = async (prompt:string)=>{
-        const response = await runGemini(prompt);
+        setResultData("");
+        setLoading(true);
+        setShowResults(true);
+        setRecentPrompt(input);
+        setInput("");
+       const response = await runGemini(prompt);
+       const formattedResponse = response.replace(/<b>(.*?)<\/b>/g, "**$1**"); 
+       setResultData(formattedResponse);
+        setLoading(false);
     }
-
     // onSent('what is react js');
     const contextValue ={
         onSent,
@@ -38,7 +45,5 @@ const ContextProvider = ({children}:{children:React.ReactNode})=>{
         </AiContext.Provider> 
     )
 }
-
-export const useAiContext =()=> useContext(AiContext);
 
 export default ContextProvider
