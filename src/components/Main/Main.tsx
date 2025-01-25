@@ -56,7 +56,7 @@ const Main = () => {
                         <div className="response">
                             {/* <ReactMarkdown className="response-data" rehypePlugins={[rehypeHighlight]}>{resultData}</ReactMarkdown>
                             <Response markdownText={resultData} /> */}
-                            <MarkdownWithCodeBlock resultData={resultData} />
+                            <MarkdownWithCodeBlock/>
                         </div>
                         // <p dangerouslySetInnerHTML={{__html:resultData}}></p>
                         }

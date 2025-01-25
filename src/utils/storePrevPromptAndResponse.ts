@@ -25,7 +25,7 @@ const StorePrevPromptAndResponse = (
 
     setPrevPrompts(prev=>[...prev,promptObj]);
     setPrevResponses(prev=>[...prev, responseObj])
-    return;
+    return id;
 }    
 
 export default StorePrevPromptAndResponse;
