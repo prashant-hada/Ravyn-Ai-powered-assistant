@@ -15,7 +15,6 @@ const ContextProvider = ({children}:{children:React.ReactNode})=>{
     const [resultData, setResultData] = useState("");
     
     const onSent = async (prompt:string)=>{
-        setResultData("");
         setLoading(true);
         setShowResults(true);
         setRecentPrompt(prompt);
@@ -24,11 +23,21 @@ const ContextProvider = ({children}:{children:React.ReactNode})=>{
        const formattedResponse = response.replace(/<b>(.*?)<\/b>/g, "**$1**"); 
        setResultData(formattedResponse);
        StorePrevPromptAndResponse(prompt, formattedResponse, setPrevPrompts, setPrevResponses)
-        setLoading(false);
+       setLoading(false);
+    }
+
+    const changeToPrevQuery =(prompt:string,id:string)=>{
+        console.log("prompt: ", prompt);
+        const responseObj:ResponseObj = (prevResponses.filter((item:ResponseObj)=>item.id=== id))[0];
+        console.log("responseObj response: ", responseObj.response);
+
+        setRecentPrompt(prompt);
+        setResultData(responseObj.response);
     }
     // onSent('what is react js');
     const contextValue ={
         onSent,
+        changeToPrevQuery,
         input,
         setInput,
         recentPrompt,

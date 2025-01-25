@@ -3,10 +3,18 @@ import {useState} from 'react'
 import "./Sidebar.css"
 import assets from "../../assets"
 import { useAiContext } from '../../hooks/useAiContext';
+import { PromptObj, ResponseObj } from '../../types';
 
 const Sidebar = () => {
     const [extended, setExtended] = useState(false);
-    const {onSent, prevPrompts, setRecentPrompt} = useAiContext();
+    const {prevPrompts, setRecentPrompt, prevResponses, setResultData, changeToPrevQuery} = useAiContext();
+
+    const prevQueryClickHandler = ({id, prompt}:PromptObj)=>{
+        // const responseObj:ResponseObj = (prevResponses.filter((item:ResponseObj)=>item.id=== id))[0];
+        // console.log("ID", id);
+        // console.log("response OBJ", responseObj);
+        changeToPrevQuery(prompt,id);
+    }
 
   return (
         <div 
@@ -24,7 +32,9 @@ const Sidebar = () => {
                 <div className="recent">
                     <p className='recent-title'>Recent</p>
                     {prevPrompts.map((item)=>(
-                    <div key={item.id} className="recent-entry">
+                    <div 
+                        onClick={()=>prevQueryClickHandler(item)}
+                        key={item.id} className="recent-entry">
                         <img src={assets.message_icon} alt="Title" />
                         <p>{item.prompt.slice(0,18)}...</p>
                     </div>

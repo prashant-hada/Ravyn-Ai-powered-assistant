@@ -1,35 +1,40 @@
 import "./MarkdownWithCodeBlock.css"
-import  { useState, useEffect,  } from 'react';
+import  { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism'; // Or choose any other theme
+import { useAiContext } from "../../hooks/useAiContext";
 
-interface Props {
-  resultData: string; // The markdown content
-}
+// interface Props {
+//   resultData: string; // The markdown content
+// }
 
-const MarkdownWithCopyBlock = ({ resultData }: Props) => {
+const MarkdownWithCopyBlock = () => {
   const [displayedText, setDisplayedText] = useState<string>('');
   const [index, setIndex] = useState<number>(0);
+  const indexRef = useRef<number>(0); 
+  const {resultData} = useAiContext();
 
   useEffect(() => {
-    if (resultData.length === 0) return;
+    if (!resultData || resultData.length === 0) return;
+
+    // Clear previous text when resultData changes
+    setDisplayedText("");
 
     const intervalId = setInterval(() => {
-      setDisplayedText((prev) => prev + resultData[index]);
-      setIndex((prevIndex) => {
-        if (prevIndex + 1 < resultData.length) {
-          return prevIndex + 1;
-        } else {
-          clearInterval(intervalId);
-          return prevIndex;
-        }
-      });
+      setDisplayedText((prev) => prev + resultData[indexRef.current]);
+
+      // Update the index
+      if (indexRef.current + 1 < resultData.length) {
+        indexRef.current += 1;
+      } else {
+        clearInterval(intervalId); // Stop the interval when done
+      }
     }, 15); // Typing speed (50ms)
 
     return () => clearInterval(intervalId); // Cleanup on component unmount
-  }, [resultData, index]);
+  }, [resultData]);
 
 
   return (
