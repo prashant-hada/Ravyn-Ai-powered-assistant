@@ -7,13 +7,17 @@ import { PromptObj, ResponseObj } from '../../types';
 
 const Sidebar = () => {
     const [extended, setExtended] = useState(false);
-    const {prevPrompts, setRecentPrompt, prevResponses, setResultData, changeToPrevQuery} = useAiContext();
+    const {prevPrompts, setRecentPrompt, prevResponses, setResultData, changeToPrevQuery,newChat} = useAiContext();
 
     const prevQueryClickHandler = ({id, prompt}:PromptObj)=>{
         // const responseObj:ResponseObj = (prevResponses.filter((item:ResponseObj)=>item.id=== id))[0];
         // console.log("ID", id);
         // console.log("response OBJ", responseObj);
         changeToPrevQuery(prompt,id);
+    }
+
+    const newChatHandler= ()=>{
+        newChat();
     }
 
   return (
@@ -24,7 +28,9 @@ const Sidebar = () => {
                 // onClick={()=>setExtended(prev=>!prev)}
                 onClick={() => (setExtended((prev) => !prev))}
                  className='menu' src={assets.menu_icon} alt="menu-icon" />
-                <div className="new-chat">
+                <div 
+                    onClick={newChatHandler}
+                    className="new-chat">
                     <img src={assets.plus_icon} alt="Plus Icon" />
                     {extended?<p>New Chat</p>:null}
                 </div>
