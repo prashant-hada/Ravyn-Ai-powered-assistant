@@ -14,27 +14,55 @@ const MarkdownWithCopyBlock = () => {
   const [displayedText, setDisplayedText] = useState<string>('');
   const [index, setIndex] = useState<number>(0);
   const indexRef = useRef<number>(0); 
-  const {resultData} = useAiContext();
+  const {resultData,newResponseFlag} = useAiContext();
 
+  
+
+  // useEffect(() => {
+  //   if (!resultData || resultData.length === 0) return;
+
+  //   // Clear previous text when resultData changes
+  //   setDisplayedText("");
+
+  //   const intervalId = setInterval(() => {
+  //     setDisplayedText((prev) => prev + resultData[indexRef.current]);
+
+  //     // Update the index
+  //     if (indexRef.current + 1 < resultData.length) {
+  //       indexRef.current += 1;
+  //     } else {
+  //       clearInterval(intervalId); // Stop the interval when done
+  //     }
+  //   }, 15); // Typing speed (50ms)
+
+  //   return () => clearInterval(intervalId); // Cleanup on component unmount
+  // }, [resultData, indexRef]);
   useEffect(() => {
-    if (!resultData || resultData.length === 0) return;
+    if (!resultData) return;
 
-    // Clear previous text when resultData changes
+    if(!newResponseFlag) {setDisplayedText(resultData); return}
+
     setDisplayedText("");
+    
+    const words = resultData.split(' ');
+    let currentWordIndex = 0;
 
-    const intervalId = setInterval(() => {
-      setDisplayedText((prev) => prev + resultData[indexRef.current]);
-
-      // Update the index
-      if (indexRef.current + 1 < resultData.length) {
-        indexRef.current += 1;
-      } else {
-        clearInterval(intervalId); // Stop the interval when done
+    const typeWords = () => {
+      if (currentWordIndex < words.length) {
+        setDisplayedText((prev) => prev + ' ' + words[currentWordIndex]);
+        currentWordIndex++;
+        setTimeout(typeWords, 100); // Type next word every 500ms
       }
-    }, 15); // Typing speed (50ms)
+    };
 
-    return () => clearInterval(intervalId); // Cleanup on component unmount
+    typeWords(); // Start typing effect
+
   }, [resultData]);
+
+
+  // useEffect(()=>{
+  //   setDisplayedText(resultData);
+  // },[resultData])
 
 
   return (

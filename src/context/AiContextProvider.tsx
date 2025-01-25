@@ -10,6 +10,7 @@ const ContextProvider = ({children}:{children:React.ReactNode})=>{
     const [recentPrompt, setRecentPrompt] = useState("");
     const [prevPrompts, setPrevPrompts] = useState<PromptObj[]>([]);
     const [prevResponses, setPrevResponses] = useState<ResponseObj[]> ([]);
+    const [newResponseFlag, setNewResponseFlag] = useState(false);
     const [showResults, setShowResults] = useState(false);
     const [loading, setLoading] = useState(false);
     const [resultData, setResultData] = useState("");
@@ -19,6 +20,7 @@ const ContextProvider = ({children}:{children:React.ReactNode})=>{
         setShowResults(true);
         setRecentPrompt(prompt);
         setInput("");
+        setNewResponseFlag(true);
        const response = await runGemini(prompt);
        const formattedResponse = response.replace(/<b>(.*?)<\/b>/g, "**$1**"); 
        setResultData(formattedResponse);
@@ -32,12 +34,20 @@ const ContextProvider = ({children}:{children:React.ReactNode})=>{
         console.log("responseObj response: ", responseObj.response);
 
         setRecentPrompt(prompt);
+        setNewResponseFlag(false);
         setResultData(responseObj.response);
+    }
+
+    const newChat=()=>{
+        setShowResults(false);
+        setRecentPrompt("");
+        setResultData("")
     }
     // onSent('what is react js');
     const contextValue ={
         onSent,
         changeToPrevQuery,
+        newChat,
         input,
         setInput,
         recentPrompt,
@@ -51,7 +61,9 @@ const ContextProvider = ({children}:{children:React.ReactNode})=>{
         resultData,
         setResultData,
         prevResponses,
-        setPrevResponses
+        setPrevResponses,
+        newResponseFlag,
+        setNewResponseFlag
     }
 
     return(

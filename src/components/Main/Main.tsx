@@ -5,7 +5,7 @@ import { useAiContext } from '../../hooks/useAiContext'
 import "./Main.css"
 
 const Main = () => {
-    const {onSent, recentPrompt, showResults, loading, resultData, setInput, input} = useAiContext();
+    const {onSent, recentPrompt, showResults, loading, setInput, input} = useAiContext();
   return (
     <div className='main'>
         <div className="nav">
