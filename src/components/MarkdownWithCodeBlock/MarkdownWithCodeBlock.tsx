@@ -51,7 +51,7 @@ const MarkdownWithCopyBlock = () => {
       if (currentWordIndex < words.length) {
         setDisplayedText((prev) => prev + ' ' + words[currentWordIndex]);
         currentWordIndex++;
-        setTimeout(typeWords, 100); // Type next word every 500ms
+        setTimeout(typeWords, 50); // Type next word every 500ms
       }
     };
 
