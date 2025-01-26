@@ -1,6 +1,7 @@
 .main{
     flex: 1;
     min-height: 100vh;
+    /* min-width: 100vw; */
     padding-bottom: 15vh;
     position: relative;
 }
@@ -18,6 +19,10 @@
 .main .nav img{
     width: 40px;
     border-radius: 50%;
+}
+
+.hidden-img{
+
 }
 
 .main-container {
@@ -46,36 +51,6 @@
     padding: 20px;
 }
 
-.main .card{
-height: 160px;
-padding: 15px;
-background-color: #f0f4f9;
-border-radius: 10px;
-position: relative;
-cursor: pointer;
-transition: ease-in-out;
-transition-duration: 300ms;
-}
-
-.main .card img{
-    width: 35px;
-    padding: 5px;
-    position: absolute;
-    background-color: white;
-    border-radius: 20px;
-    bottom: 10px;
-    right: 10px;
-}
-
-.main .card p{
-    color: #585858;
-    font-size:17px;
-}
-
-.main .card:hover {
-    background-color: #dfe4ea;
-}
-
 .main-bottom{
     position: absolute;
     bottom: 0;
@@ -94,6 +69,10 @@ transition-duration: 300ms;
     padding: 10px 20px ;
     border-radius: 50px;
 }
+
+/* .search-box input{
+    min-width: 55%;
+} */
 
 .search-box img{
     width: 24px;
@@ -182,5 +161,58 @@ border-radius: 50px;
     }
     100%{
         background-position: 800px 0px;
+    }
+}
+
+@media (max-width:600px) {
+    .main{
+        min-width: 100vw;
+    }
+
+    .main .nav{
+        width:100% ;
+        padding-left: 18vw;
+        position: fixed;
+        z-index: 8;
+        background-color: #ffffff ;
+    }
+
+    .main-container{
+        margin-top: 50px;
+    }
+
+    .main .greet{
+        font-size: 40px;
+        padding-left: 18vw;
+        margin:0px ;
+        
+    }
+
+    .cards{
+        /* display: grid; */
+        grid-template-columns:  repeat(auto-fill, minmax(100px,1fr));
+        padding: 10px;
+        padding-left:10vh;
+        padding-bottom: 50px;
+    }
+
+    .main-bottom{
+        flex:none;
+        padding-left: 10vh;
+    }
+    .main-bottom img{
+        width: 20px;
+    }
+    .hidden-img{
+        display: none;
+    }
+    .search-box{
+        padding: 5px 7px;
+    }
+    .search-box div{
+        gap:5px;
+    }
+    .search-box input{
+        min-width: 55%;
     }
 }

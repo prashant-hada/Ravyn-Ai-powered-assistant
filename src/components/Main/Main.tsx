@@ -2,6 +2,7 @@ import assets from '../../assets'
 import "highlight.js/styles/atom-one-dark.css";
 import MarkdownWithCodeBlock from '../MarkdownWithCodeBlock/MarkdownWithCodeBlock';
 import { useAiContext } from '../../hooks/useAiContext'
+import Card from '../Card/Card';
 import "./Main.css"
 
 const Main = () => {
@@ -21,22 +22,10 @@ const Main = () => {
                 <p>How can I help you today</p>
             </div>
             <div className="cards">
-                <div className="card">
-                    <p>Suggest beatiful places to see on an upcomming road trip</p>
-                    <img src={assets.compass_icon} alt="" />
-                </div>
-                <div className="card">
-                    <p>Briefly summarize this concept: urban planning</p>
-                    <img src={assets.bulb_icon} alt="" />
-                </div>
-                <div className="card">
-                    <p>Brainstorm team bonding activities for our work retreat</p>
-                    <img src={assets.message_icon} alt="" />
-                </div>
-                <div className="card">
-                    <p>Improve the readability of the code</p>
-                    <img src={assets.code_icon} alt="" />
-                </div> 
+                <Card content='Suggest beatiful places to see on an upcomming road trip' icon={assets.compass_icon} />
+                <Card content='Briefly summarize this concept: urban planning' icon={assets.bulb_icon} />
+                <Card content='Brainstorm team bonding activities for our work retreat' icon={assets.message_icon} />
+                <Card content='Improve the readability of the code' icon={assets.code_icon} />
             </div>
                 </> 
 
@@ -78,8 +67,8 @@ const Main = () => {
                       }}
                      />
                     <div className="">
-                        <img src={assets.gallery_icon} alt="" />
-                        <img src={assets.mic_icon} alt="" />
+                        <img className='hidden-img' src={assets.gallery_icon} alt="" />
+                        <img className='hidden-img' src={assets.mic_icon} alt="" />
                         <img onClick={()=> onSent(input)} src={assets.send_icon} alt="" />
                     </div>
                 </div>
