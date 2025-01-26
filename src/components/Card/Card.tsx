@@ -3,7 +3,7 @@ import "./Card.css"
 import { useAiContext } from '../../hooks/useAiContext'
 
 const Card = ({content, icon}:{content:string, icon:string}) => {
-    const {onSent, prevPrompts, changeToPrevQuery, recentPrompt} = useAiContext()
+    const {onSent, prevPrompts, changeToPrevQuery} = useAiContext()
 
     const cardClickHandler =()=>{
         const promptObj = prevPrompts.find(item=> item.prompt === content);
