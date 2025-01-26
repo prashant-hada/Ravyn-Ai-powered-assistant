@@ -10,7 +10,7 @@ const Main = () => {
   return (
     <div className='main'>
         <div className="nav">
-            <p>Gemini</p>
+            <p>Rayvyn</p>
             <img src={assets.user_icon} alt="" />
         </div>
         <div className="main-container">
@@ -18,8 +18,8 @@ const Main = () => {
             {!showResults? 
                 <>
                 <div className="greet">
-                <p><span>Hello, Dev</span></p>
-                <p>How can I help you today</p>
+                <p><span>Hey, Amigo</span></p>
+                <p>Shall we get started?</p>
             </div>
             <div className="cards">
                 <Card content='Suggest beatiful places to see on an upcomming road trip' icon={assets.compass_icon} />
@@ -73,7 +73,7 @@ const Main = () => {
                     </div>
                 </div>
                 <div className="bottom-info">
-                    Gemini may display info, including about people, so double-check its responses.
+                    Ravyn uses third-party APIs to generate it's response, thus is not responsible for any info that proves out to be not true. Use Ravyn at your own discretion.
                 </div>
             </div>
         </div>
