@@ -7,7 +7,7 @@ import { PromptObj } from '../../types';
 
 const Sidebar = () => {
     const [extended, setExtended] = useState(false);
-    const {prevPrompts, recentPrompt, setRecentPrompt, prevResponses, setResultData, changeToPrevQuery,newChat} = useAiContext();
+    const {prevPrompts, recentPrompt, changeToPrevQuery,newChat} = useAiContext()!;
 
     const prevQueryClickHandler = ({id, prompt}:PromptObj)=>{
         changeToPrevQuery(prompt,id);
@@ -34,7 +34,7 @@ const Sidebar = () => {
                 {extended?
                 <div className="recent">
                     <p className='recent-title'>Recent</p>
-                    {prevPrompts.map((item)=>(
+                    {prevPrompts.map((item:PromptObj)=>(
                     <div 
                         onClick={()=>prevQueryClickHandler(item)}
                         key={item.id} className={`recent-entry ${recentPrompt === item.prompt ? 'selected' : ''}`}>
