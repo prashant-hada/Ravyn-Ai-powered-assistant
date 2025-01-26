@@ -1,0 +1,43 @@
+.card {
+    height: 160px;
+    padding: 15px;
+    background-color: #f0f4f9;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    transition: ease-in-out;
+    transition-duration: 300ms;
+}
+
+.card img {
+    width: 35px;
+    padding: 5px;
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    bottom: 10px;
+    right: 10px;
+}
+
+.card p {
+    color: #585858;
+    font-size: 17px;
+}
+
+.card:hover {
+    background-color: #dfe4ea;
+}
+
+@media (max-width:450px){
+    .card {
+        height: 130px;
+    }
+
+    .card p {
+        font-size: 13px;
+    }
+
+    .card img {
+        width: 25px;
+    }
+}
