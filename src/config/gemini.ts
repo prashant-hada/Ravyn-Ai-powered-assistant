@@ -3,8 +3,7 @@ const apiUrl = import.meta.env.VITE_API_KEY;
 import {
     GoogleGenerativeAI
 } from "@google/generative-ai";
-  
-//   const apiKey = "AIzaSyAAFw_GJKAen9VxlbqhnBQMJJ1VUWGsCDw";
+
 const apiKey = apiUrl;
   const genAI = new GoogleGenerativeAI(apiKey);
   
