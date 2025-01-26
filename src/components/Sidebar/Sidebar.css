@@ -79,6 +79,10 @@
     cursor: pointer;
 }
 
+.selected{
+    background-color: #e2e6eb;  
+}
+
 
 @media (max-width:600px) {
     .sidebar{

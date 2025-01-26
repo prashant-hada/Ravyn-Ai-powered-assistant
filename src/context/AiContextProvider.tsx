@@ -29,9 +29,7 @@ const ContextProvider = ({children}:{children:React.ReactNode})=>{
     }
 
     const changeToPrevQuery =(prompt:string,id:string)=>{
-        console.log("prompt: ", prompt);
         const responseObj:ResponseObj = (prevResponses.filter((item:ResponseObj)=>item.id=== id))[0];
-        console.log("responseObj response: ", responseObj.response);
         setShowResults(true);
         setRecentPrompt(prompt);
         setNewResponseFlag(false);
