@@ -83,6 +83,10 @@
     background-color: #e2e6eb;  
 }
 
+.para{
+    animation: fadeIn 0.5s;
+}
+
 
 @media (max-width:600px) {
     .sidebar{
