@@ -193,7 +193,7 @@ border-radius: 50px;
         grid-template-columns:  repeat(auto-fill, minmax(100px,1fr));
         padding: 10px;
         padding-left:10vh;
-        padding-bottom: 50px;
+        padding-bottom: 70px;
     }
 
     .main-bottom{
@@ -214,5 +214,9 @@ border-radius: 50px;
     }
     .search-box input{
         min-width: 55%;
+    }
+
+    .result{
+        padding-left: 10vh;
     }
 }
